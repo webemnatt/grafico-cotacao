@@ -4,16 +4,24 @@ import './style.scss';
 
 const commoditiesList = ['Açúcar', 'Milho', 'Soja', 'Café', 'Boi'];
 
+const stockExchange = [
+  {
+    id: 1,
+    name: 'Bolsa de Chicago',
+    value: 120,
+  },
+];
+
 export default function App() {
-  const [quotation, setQuotation] = React.useState('');
-  const [points, setPoints] = React.useState('');
+  // const [quotation, setQuotation] = React.useState('');
+  // const [points, setPoints] = React.useState('');
   const [activeButton, setActiveButton] = useState(null);
   const chartContainerRef = useRef(null);
   const [showChart, setShowChart] = useState(false);
 
   const handleButtonClick = (button) => {
-    setQuotation('Bolsa de Chicago');
-    setPoints('-102 pts');
+    // setQuotation('Bolsa de Chicago');
+    // setPoints('-102 pts');
     setActiveButton(button);
     setShowChart(true);
 
@@ -81,7 +89,7 @@ export default function App() {
   return (
     <div>
       <div className="grafico-cotacoes-container">
-        <div class="commodities">
+        <div className="commodities">
           {commoditiesList.map((commodity, index) => (
             <button
               disabled={activeButton === `button${index + 1}`}
@@ -91,13 +99,32 @@ export default function App() {
             </button>
           ))}
         </div>
-        <div className="quotation">
-          <span className="quotationData">{quotation}</span>
-          <span className="today-quotation">{points}</span>
-        </div>
-        <div className="chart-container">
-          <div ref={chartContainerRef}>{showChart} </div>
-        </div>
+        {stockExchange.map((item, id) => {
+          let value = '';
+          if (Math.sign(item.value) === 0) {
+            value = 'stable';
+          } else if (Math.sign(item.value) > 0) {
+            value = 'positive';
+          } else {
+            value = 'negative';
+          }
+
+          return (
+            <div className="quotation" key={id}>
+              <div className="quotation__name">{item.name}</div>
+              <div
+                className={`${value}-quotation__value ${value}-quotation__value__icon
+                `}
+              >
+                {Math.abs(item.value)} pts
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="chart-container">
+        <div ref={chartContainerRef}>{showChart} </div>
       </div>
     </div>
   );

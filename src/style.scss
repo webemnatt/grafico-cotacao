@@ -39,40 +39,67 @@ button {
 
 .quotation {
   display: flex;
-
-  .quotationData {
-    height: 28px;
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: 24px;
+  overflow: hidden;
+  &__name {
+    font-size: 18px;
+    font-weight: normal;
   }
-  &__icon {
-    width: 9px;
-    height: 4.5px;
-    margin-left: 8px;
-    background-repeat: no-repeat;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4Ljk4MyIgaGVpZ2h0PSI0LjQ5MSIgdmlld0JveD0iMCAwIDguOTgzIDQuNDkxIj4KICAgIDxwYXRoIGRhdGEtbmFtZT0iSWNvbiBpb25pYy1tZC1hcnJvdy1kcm9wZG93biIgZD0ibTkgMTcuOTkxIDQuNDkxLTQuNDkxIDQuNDkxIDQuNDkxeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTkgLTEzLjUpIiBzdHlsZT0iZmlsbDojMTYyZmI5Ii8+Cjwvc3ZnPgo=');
-    position: relative;
+}
 
-    &-negative {
-      transform: rotate(180deg);
-      filter: invert(63%) sepia(100%) saturate(7315%) hue-rotate(344deg)
-        brightness(91%) contrast(97%);
+.positive-quotation {
+  &__value {
+    color: #162fb9;
+    margin-left: 20%;
+    font-weight: bold;
+    width: 25%;
+
+    &__icon {
       &::before {
-        border-top: 10px solid;
+        content: '';
+        position: absolute;
+        margin: 7px 0px 0px -20px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #162fb9;
       }
     }
+  }
+}
 
-    &-stable {
-      background-image: none;
-      &::after {
-        position: absolute;
+.negative-quotation {
+  &__value {
+    color: #d14e4e;
+    margin-left: 20%;
+    font-weight: bold;
+    width: 25%;
+
+    &__icon {
+      &::before {
         content: '';
-        height: 6px;
-        width: 6px;
-        border-radius: 50%;
-        background-color: gray;
-        margin-left: 1.5px;
+        position: absolute;
+        width: 0;
+        height: 0;
+        margin: 5px 0px 0px -20px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #d14e4e;
+      }
+    }
+  }
+}
+
+.stable-quotation {
+  &__value {
+    color: gray;
+    margin-left: 20%;
+    font-weight: bold;
+    width: 25%;
+
+    &__icon {
+      &::before {
+        content: '●';
+        color: gray;
+        margin-right: 5px;
       }
     }
   }
