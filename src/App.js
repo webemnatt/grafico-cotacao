@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { createChart } from 'lightweight-charts';
 import './style.scss';
 
+const commoditiesList = ['Açúcar', 'Milho', 'Soja', 'Café', 'Boi'];
+
 export default function App() {
   const [quotation, setQuotation] = React.useState('');
   const [points, setPoints] = React.useState('');
@@ -74,48 +76,20 @@ export default function App() {
     ]);
 
     chart.timeScale().fitContent();
-
-    /*
-    window.addEventListener('resize', () => {
-      chart.resize(window.innerWidth, window.innerHeight);
-    });
-    */ //está fazendo redimensionar para maior, desajustando tamanho da área do gráfico.
   };
 
   return (
     <div>
       <div className="grafico-cotacoes-container">
         <div class="commodities">
-          <button
-            disabled={activeButton === 'button1'}
-            onClick={() => handleButtonClick('button1')}
-          >
-            Açúcar
-          </button>
-          <button
-            disabled={activeButton === 'button2'}
-            onClick={() => handleButtonClick('button2')}
-          >
-            Soja
-          </button>
-          <button
-            disabled={activeButton === 'button3'}
-            onClick={() => handleButtonClick('button3')}
-          >
-            Milho
-          </button>
-          <button
-            disabled={activeButton === 'button4'}
-            onClick={() => handleButtonClick('button4')}
-          >
-            Boi
-          </button>
-          <button
-            disabled={activeButton === 'button5'}
-            onClick={() => handleButtonClick('button4')}
-          >
-            Trigo
-          </button>
+          {commoditiesList.map((commodity, index) => (
+            <button
+              disabled={activeButton === `button${index + 1}`}
+              onClick={() => handleButtonClick(`button${index + 1}`)}
+            >
+              {commodity}
+            </button>
+          ))}
         </div>
         <div className="quotation">
           <span className="quotationData">{quotation}</span>
